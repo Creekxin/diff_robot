@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="fishbot">
+    <xacro:include filename="$(find fishbot_description)/urdf/fishbot/common_inertial.xacro" />
+    <xacro:macro name="imu_xacro" params="xyz">
+        <!--机器人的imu部分-->
+        <link name="imu_link">
+            <visual> 
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <box size="0.02 0.02 0.02"/>
+                </geometry>  
+                <material name="black">
+                    <color rgba="0 0 0 0.8"/>
+                </material>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <box size="0.02 0.02 0.02"/>
+                </geometry>
+                <material name="black">
+                    <color rgba="0 0 0 0.8"/>
+                </material>
+            </collision>
+            <xacro:box_inertia m="0.05" w="0.02" h="0.02" d="0.02" />
+        </link>
+        <!--机器人关节的关节，用于组合-->
+        <joint name="imu_joint" type="fixed">
+            <!-- 父部件--> 
+            <parent link="base_link"/>
+            <!-- 子部件-->
+            <child link="imu_link"/>
+            <!-- 子部件相对于父部件的旋转量与偏移量-->
+            <origin xyz="${xyz}"/>
+        </joint>
+    </xacro:macro>
+</robot>

@@ -1,0 +1,7 @@
+/partol_node:
+  ros__parameters:
+    initial_point: [0.0, 0.0, 0.0]
+    target_points: [0.0, 0.0, 0.0, 1.0, 2.0, 3.14, -4.5, 1.5, 1.57, -8.0, -5.0, 1.57, 1.0, -5.0, 3.14]
+    # 图像保存目录，节点会自动创建该目录；缺失时默认保存到 patrol_images/
+    img_save_path: "/home/xinxiyuan/chapt7/chapt7_ws/patrol_images/"
+    use_sim_time: true

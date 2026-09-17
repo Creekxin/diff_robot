@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="first_robot">
+    <xacro:macro name="base_link" params="length radius">
+        <!--机器人身体部分-->
+        <link name="base_link">
+            <!--部件外观描述-->
+            <visual>
+                <!-- 沿自己几何中心的旋转量与偏移量-->
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <!-- 描述部件外观的几何体-->
+                <geometry>
+                    <!-- 圆柱-->
+                    <cylinder length="${length}" radius="${radius}" />
+                </geometry>
+                <material name="white">
+                    <color rgba="1 1 1 0.5"/>
+                </material>
+            </visual>
+        </link>
+    </xacro:macro>
+    
+    <xacro:macro name="imu_link" params="imu_name xyz">
+        <!--机器人的imu部分-->
+        <link name="${imu_name}_link">
+            <visual> 
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <box size="0.02 0.02 0.02"/>
+                </geometry>  
+                <material name="black">
+                    <color rgba="0 0 0 0.5"/>
+                </material>
+            </visual>
+        </link>
+        <!--机器人关节的关节，用于组合-->
+        <joint name="${imu_name}_joint" type="fixed">
+            <!-- 父部件--> 
+            <parent link="base_link"/>
+            <!-- 子部件-->
+            <child link="${imu_name}_link"/>
+            <!-- 子部件相对于父部件的旋转量与偏移量-->
+            <origin xyz="${xyz}" rpy="0 0 0"/>
+        </joint>
+    </xacro:macro>
+    <xacro:base_link length="0.12" radius="0.1"/>
+    <xacro:imu_link imu_name="imu_up" xyz="0.0 0 0.03" />
+    <xacro:imu_link imu_name="imu_down" xyz="0.0 0 -0.03" />
+</robot>

@@ -1,0 +1,16 @@
+# ROS 2 build artifacts
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Lint / editor
+.ruff_cache/
+.vscode/
+
+# Runtime generated
+patrol_images/
